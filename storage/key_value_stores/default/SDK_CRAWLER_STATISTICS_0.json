@@ -1,0 +1,52 @@
+{
+  "requestsFinished": 0,
+  "requestsFailed": 1,
+  "requestsRetries": 1,
+  "requestsFailedPerMinute": 0,
+  "requestsFinishedPerMinute": 0,
+  "requestMinDurationMillis": null,
+  "requestMaxDurationMillis": 0,
+  "requestTotalFailedDurationMillis": 15641,
+  "requestTotalFinishedDurationMillis": 0,
+  "crawlerStartedAt": "2025-09-19T10:16:01.345Z",
+  "crawlerFinishedAt": "2025-09-19T10:17:05.645Z",
+  "statsPersistedAt": "2025-09-19T10:17:05.645Z",
+  "crawlerRuntimeMillis": 64483,
+  "crawlerLastStartTimestamp": 1758276961162,
+  "requestRetryHistogram": [
+    null,
+    null,
+    null,
+    1
+  ],
+  "statsId": 0,
+  "requestAvgFailedDurationMillis": 15641,
+  "requestAvgFinishedDurationMillis": null,
+  "requestTotalDurationMillis": 15641,
+  "requestsTotal": 1,
+  "requestsWithStatusCode": {
+    "200": 4
+  },
+  "errors": {
+    "C:\\Users\\HP.DESKTOP-T07U92L\\Desktop\\Product Data Explorer — Full-Stack Assignment\\backend\\src\\scraper\\scraper.service.ts:67:20": {
+      "missing error code": {
+        "TimeoutError": {
+          "page.waitForSelector: Timeout 10000ms exceeded.": {
+            "count": 1
+          }
+        }
+      }
+    }
+  },
+  "retryErrors": {
+    "C:\\Users\\HP.DESKTOP-T07U92L\\Desktop\\Product Data Explorer — Full-Stack Assignment\\backend\\src\\scraper\\scraper.service.ts:67:20": {
+      "missing error code": {
+        "TimeoutError": {
+          "page.waitForSelector: Timeout 10000ms exceeded.": {
+            "count": 3
+          }
+        }
+      }
+    }
+  }
+}
