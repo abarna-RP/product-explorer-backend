@@ -1,19 +1,22 @@
-
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
+import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
-  // ✅ Allow requests from frontend
+  // 🌍 Allow frontend to call backend (CORS enable)
   app.enableCors({
-    origin: 'http://localhost:3000', // Production-ல் உங்கள் Vercel URL-ஐ இங்கே கொடுக்க வேண்டும்
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    origin: 'http://localhost:3000', // production-க்கு restrict பண்ணலாம் (e.g., 'http://localhost:3000')
     credentials: true,
   });
 
+  // ✅ DTO validation globally enable
+  app.useGlobalPipes(new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true }));
+
+  // 🚀 Start server
   const port = process.env.PORT || 3001;
   await app.listen(port);
-  console.log(`Application is running on: ${await app.getUrl()}`);
+  console.log(`🚀 Backend running on http://localhost:${port}`);
 }
 bootstrap();

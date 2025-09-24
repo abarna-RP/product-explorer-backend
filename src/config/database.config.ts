@@ -1,17 +1,18 @@
-import { TypeOrmModuleOptions } from '@nestjs/typeorm';
-import { ProductDetail } from '../products/entities/product-detail.entity';
-import { Category } from 'src/products/entities/category.entity';
-import { Review } from 'src/products/entities/review.entity';
-import { Product } from 'src/products/entities/product.entity';
+import { ConfigService } from "@nestjs/config";
+import { TypeOrmModuleOptions } from "@nestjs/typeorm";
 
-export const databaseConfig = (): TypeOrmModuleOptions => ({
-  type: 'postgres', 
-  host: process.env.DB_HOST || 'localhost',
-  port: parseInt(process.env.DB_PORT ?? '5432', 10),
-  username: process.env.DB_USER || 'postgres',
-  password: process.env.DB_PASS || 'mysecretpassword',
-  database: process.env.DB_NAME || 'product_explorer_db'
-,
-  entities: [Product, ProductDetail, Category, Review],
-  synchronize: true, // 🔹 dev purpose only (auto create tables)
+export const databaseConfig = async (
+  configService: ConfigService
+): Promise<TypeOrmModuleOptions> => ({
+  type: "postgres",
+  host: configService.get<string>("DB_HOST"),
+  port: parseInt(configService.get<string>("DB_PORT") || "5432"),
+  username: configService.get<string>("DB_USERNAME"),
+  password: configService.get<string>("DB_PASSWORD"),
+  database: configService.get<string>("DB_DATABASE"),
+  entities: [__dirname + "/../**/*.entity{.ts,.js}"],
+  synchronize: true,
+  ssl: {
+    rejectUnauthorized: false, // 👈 Render/Postgres-க்கு SSL allow செய்யணும்
+  },
 });
