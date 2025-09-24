@@ -5,14 +5,20 @@ import { ValidationPipe } from '@nestjs/common';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
-  // 🌍 Allow frontend to call backend (CORS enable)
+  // 🌍 Allow both localhost (dev) + Vercel (prod) frontend
   app.enableCors({
-    origin: 'http://localhost:3000', // production-க்கு restrict பண்ணலாம் (e.g., 'http://localhost:3000')
+    origin: [
+      'http://localhost:3000', 
+      'https://product-explorer-frontend.vercel.app' // ✅ deployed frontend
+    ],
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true,
   });
 
   // ✅ DTO validation globally enable
-  app.useGlobalPipes(new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true }));
+  app.useGlobalPipes(
+    new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true })
+  );
 
   // 🚀 Start server
   const port = process.env.PORT || 3001;
